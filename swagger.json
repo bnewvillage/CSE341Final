@@ -5,10 +5,10 @@
     "description": "This API will manage tasks, projects, users, and comments.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341final-mzat.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/projects/": {

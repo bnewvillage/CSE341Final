@@ -5,7 +5,7 @@ const doc = {
     title: 'Tasker API',
     description: 'This API will manage tasks, projects, users, and comments.'
   },
-  host: 'localhost:3000'
+  host: 'cse341final-mzat.onrender.com'
 };
 
 const outputFile = './swagger.json';
