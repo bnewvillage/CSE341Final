@@ -46,6 +46,7 @@ const getOneProject = async (req, res, param) => {
 }
 
 const createProject = async (req, res)=>{
+    //#swagger.tags = ['Projects']
     try {
         const project = {
             title: req.body.title,
@@ -66,6 +67,7 @@ const createProject = async (req, res)=>{
 }
 
 const updateProject = async (req, res) => {
+    //#swagger.tags = ['Projects']
     try {
         const projectId = new ObjectId(req.params.id);
         const updateData = {
@@ -90,6 +92,7 @@ const updateProject = async (req, res) => {
 };
 
 const deleteProject = async (req, res) => {
+    //#swagger.tags = ['Projects']
     try {
         const projectId = new ObjectId(req.params.id);
 
