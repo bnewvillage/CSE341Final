@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAdmins = async(req,res) =>{
     try {
-        await mongoDb.getDatabase().db().collection('users').find({type: 'admin'}).toArray()
+        await mongoDb.getDatabase().db().collection('users').find({role: 'admin'}).toArray()
         .then((admins, err) =>{
             if (admins.length === 0){
                 return res.status(404).json({message: 'Could not find users.'})

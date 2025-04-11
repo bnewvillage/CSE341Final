@@ -21,10 +21,10 @@ passport.use(new GoogleStrategy({
     try {
       const db = await mongoDb.getDatabase().db();
       
-      const existingUser = await db.collection('users').findOne({ googleId: profile.id });
+      let user = await db.collection('users').findOne({ googleId: profile.id });
   
-      if (!existingUser) {
-        await db.collection('users').insertOne({
+      if (!user) {
+        user = await db.collection('users').insertOne({
           googleId: profile.id,
           displayName: profile.displayName,
           name: {
@@ -39,7 +39,7 @@ passport.use(new GoogleStrategy({
         console.log('New user saved:', profile.displayName);
       }
   
-      return done(null, profile);
+      return done(null, user);
     } catch (err) {
       console.error('Error saving user:', err);
       return done(err, null);
@@ -64,7 +64,7 @@ app.get('/login',
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-    res.redirect('/');
+    res.redirect('/api-docs');
 });
 
 app.use('/', require('./routes/index.js'))

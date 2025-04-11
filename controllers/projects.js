@@ -1,6 +1,5 @@
 const mongoDb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
-const Project = require('../models/project')
 
 const getAllProjects = async (req, res) => {
     //#swagger.tags = ['Projects']
@@ -48,19 +47,69 @@ const getOneProject = async (req, res, param) => {
 
 const createProject = async (req, res)=>{
     try {
-        const project = new Project({
-          title: req.body.title,
-          description: req.body.description,
-          owner: req.user._id,
-          members: req.body.members.map(id => mongoose.Types.ObjectId(id))
-        });
+        const project = {
+            title: req.body.title,
+            description: req.body.description,
+            owner: req.user._id,
+            members: req.body.members.map(id => new ObjectId(id)),
+            createdAt: new Date()
+            };
+        const response = await mongoDb.getDatabase().db().collection('projects').insertOne(project);
+            if (response.acknowledged){
+                res.status(201).json({message: 'Project Created.', project: project});
+            } else {
+                res.status(500).json({message: 'Failed to create project.'});
+            }
     }   catch (err) {
         res.status(500).json({message: err.message || 'Error occurred'});
     }
 }
 
+const updateProject = async (req, res) => {
+    try {
+        const projectId = new ObjectId(req.params.id);
+        const updateData = {
+            title: req.body.title,
+            description: req.body.description,
+            members: req.body.members ? req.body.members.map(id => new ObjectId(id)) : []
+        };
+
+        const response = await mongoDb.getDatabase().db().collection('projects').updateOne(
+            { _id: projectId },
+            { $set: updateData }
+        );
+
+        if (response.matchedCount === 0) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        res.status(200).json({ message: 'Project updated successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message || 'Error occurred while updating project' });
+    }
+};
+
+const deleteProject = async (req, res) => {
+    try {
+        const projectId = new ObjectId(req.params.id);
+
+        const response = await mongoDb.getDatabase().db().collection('projects').deleteOne({ _id: projectId });
+
+        if (response.deletedCount === 0) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        res.status(200).json({ message: 'Project deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message || 'Error occurred while deleting project' });
+    }
+};
+
+
 module.exports = {
     getAllProjects,
     getOneProject,
-    createProject
+    createProject,
+    updateProject,
+    deleteProject
 };
