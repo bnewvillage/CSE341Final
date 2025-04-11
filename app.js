@@ -16,7 +16,7 @@ app.use(express.json());
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "https://cse341final-mzat.onrender.com/auth/google/callback"
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const db = await mongoDb.getDatabase().db();
