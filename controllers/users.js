@@ -23,7 +23,19 @@ const getAdmins = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const user = req.body;
+        const user = {
+            googleId: req.body.googleId,
+            displayName: req.body.displayName,
+            name: {
+              givenName: req.body.givenName,
+              familyName: req.body.familyName
+            },
+            email: req.body.email,
+            photo: req.body.photos,
+            provider: profile.provider,
+            role: 'user'
+          };
+          
         const result = await mongoDb.getDatabase().db().collection('users').insertOne(user);
         if (result.acknowledged) {
             res.status(201).json({ id: result.insertedId });
