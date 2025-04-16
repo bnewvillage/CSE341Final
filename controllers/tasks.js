@@ -90,7 +90,6 @@ const deleteTask = async (req, res) => {
             { _id: projectId },
             { $pull: {tasks: taskId }}
         );
-
         
         if (response.deletedCount > 0) {
             res.status(200).json({ message: 'Task deleted.' });
