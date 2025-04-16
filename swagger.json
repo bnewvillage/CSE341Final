@@ -5,12 +5,22 @@
     "description": "This API will manage tasks, projects, users, and comments.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341final-mzat.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "paths": {
+    "/logout": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/projects/": {
       "get": {
         "tags": [
@@ -64,6 +74,9 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -90,6 +103,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -137,6 +153,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -161,6 +180,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -197,6 +219,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -256,6 +281,9 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -286,6 +314,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -335,6 +366,9 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -364,6 +398,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -410,6 +447,9 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -462,6 +502,9 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -499,6 +542,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -510,6 +556,9 @@
     },
     "/users/": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -527,6 +576,9 @@
         }
       },
       "post": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -569,6 +621,9 @@
     },
     "/users/{id}": {
       "put": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
@@ -591,6 +646,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "User"
+        ],
         "description": "",
         "parameters": [
           {
