@@ -8,7 +8,7 @@
   "host": "cse341final-mzat.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/logout": {
@@ -103,9 +103,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
