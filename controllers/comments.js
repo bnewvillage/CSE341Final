@@ -83,11 +83,12 @@ const createCommentForTask = async (req, res, param) => {
 const updateComment = async (req, res) => {
     //#swagger.tags = ['Comment']
     try {
+        const taskId = new ObjectId(req.params.taskId)
         const commentId = new ObjectId(req.params.id);
         const updatedData = {
             content: req.body.content,
             authorId: new ObjectId(req.body.authorId),
-            taskId: new ObjectId(req.params.taskId),
+            taskId: taskId,
             timestamp: new Date()
         };
 
