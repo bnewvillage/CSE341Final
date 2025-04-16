@@ -8,7 +8,7 @@
   "host": "cse341final-mzat.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/logout": {
@@ -196,9 +196,6 @@
           "Task"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "projectId",
@@ -225,9 +222,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          },
-          "505": {
-            "description": "HTTP Version Not Supported"
           }
         }
       },
@@ -674,9 +668,6 @@
           "Task"
         ],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "taskId",
@@ -694,9 +685,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          },
-          "505": {
-            "description": "HTTP Version Not Supported"
           }
         }
       },
