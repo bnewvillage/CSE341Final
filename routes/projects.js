@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 const projectsController = require('../controllers/projects');
 const { isAuthenticated } = require('../middleware/authenticate');
 
