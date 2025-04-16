@@ -25,7 +25,7 @@ const getAllProjects = async (req, res) => {
 //get ONE project
 const getOneProject = async (req, res, param) => {
     //#swagger.tags = ['Projects']
-    const projectId = new ObjectId(req.params.id);
+    const projectId = new ObjectId(req.params.projectId);
     try {
         await mongoDb.getDatabase().db().collection('projects').find({_id: projectId}).toArray()
         .then((projects, err) =>{
@@ -69,7 +69,7 @@ const createProject = async (req, res)=>{
 const updateProject = async (req, res) => {
     //#swagger.tags = ['Projects']
     try {
-        const projectId = new ObjectId(req.params.id);
+        const projectId = new ObjectId(req.params.projectId);
         const updateData = {
             title: req.body.title,
             description: req.body.description,
