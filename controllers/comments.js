@@ -91,7 +91,7 @@ const updateComment = async (req, res) => {
             timestamp: new Date()
         };
 
-        const result = await db.collection('comments').updateOne(
+        const result = await mongoDb.getDatabase().db().collection('comments').updateOne(
             { _id: commentId, taskId: taskId },
             { $set: updatedData }
           );
