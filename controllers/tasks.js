@@ -81,6 +81,7 @@ const updateTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     //#swagger.tags = ['Task']
     try {
+        const projectId = new ObjectId(req.params.projectId);
         const taskId = new ObjectId(req.params.taskId);
         const response = await mongoDb.getDatabase().db().collection('tasks').deleteOne({ _id: taskId });
 
