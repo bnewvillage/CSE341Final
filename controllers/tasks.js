@@ -5,22 +5,18 @@ const getTask = async (req, res) => {
     //#swagger.tags = ['Task']
     try {
         const taskId = new ObjectId(req.params.taskId);
-        await mongoDb.getDatabase().db().collection('tasks').find({ _id: taskId }).toArray()
-            .then((task, error) => {
-                if (task.length === 0) {
-                    return res.status(404).json({ message: 'No data found' });
-                }
+        const task = await mongoDb.getDatabase().db().collection('tasks').findOne({ _id: taskId });
 
-                if (error) {
-                    return res.status(505).json({ message: error });
-                }
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).json(task);
-            });
-    } catch (error) {
-        res.status(500).json({ message: error.message || 'Internal Server Error.' });
+        if (!task) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
+
+        res.status(200).json(task);
+    } catch (err) {
+        res.status(500).json({ message: err.message || 'Internal Server Error.' });
     }
 };
+
 
 const createTask = async (req, res) => {
     //#swagger.tags = ['Task']
