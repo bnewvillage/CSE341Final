@@ -2,6 +2,7 @@ const mongoDb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAdmins = async (req, res) => {
+    //#swagger.tags = ['User']
     try {
         await mongoDb.getDatabase().db().collection('users').find({ role: 'admin' }).toArray()
             .then((admins, err) => {
@@ -22,6 +23,7 @@ const getAdmins = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+    //#swagger.tags = ['User']
     try {
         const user = {
             googleId: req.body.googleId,
@@ -35,7 +37,7 @@ const createUser = async (req, res) => {
             provider: profile.provider,
             role: 'user'
           };
-          
+
         const result = await mongoDb.getDatabase().db().collection('users').insertOne(user);
         if (result.acknowledged) {
             res.status(201).json({ id: result.insertedId });
@@ -48,6 +50,7 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+    //#swagger.tags = ['User']
     try {
         const userId = new ObjectId(req.params.id);
         const user = req.body;
@@ -63,6 +66,7 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+    //#swagger.tags = ['User']
     try {
         const userId = new ObjectId(req.params.id);
         const result = await mongoDb.getDatabase().db().collection('users').deleteOne({ _id: userId });
