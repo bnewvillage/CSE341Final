@@ -49,7 +49,7 @@ const getAllComments = async (req, res) => {
 };
 
 
-const createCommentForTask = async (req, res, param) => {
+const createCommentForTask = async (req, res) => {
     //#swagger.tags = ['Comment']
     try {
         const taskId = new ObjectId(req.params.taskId);
@@ -98,7 +98,7 @@ const updateComment = async (req, res) => {
           );
           
         if (result.modifiedCount > 0) {
-            res.status(204).send();
+            res.status(204).json(updatedData);
         } else {
             res.status(404).json({ message: 'Comment not found or unchanged' });
         }
