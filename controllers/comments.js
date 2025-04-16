@@ -61,7 +61,7 @@ const createCommentForTask = async (req, res) => {
         };
 
         const result = await mongoDb.getDatabase().db().collection('comments').insertOne(comment);
-        const commentId = result.insertedId;
+        const commentId = new ObjectId(result.insertedId);
 
         if (result.acknowledged) {
             res.status(201).json({ message: 'Comment created', comment });

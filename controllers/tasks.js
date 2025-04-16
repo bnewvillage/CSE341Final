@@ -25,12 +25,12 @@ const createTask = async (req, res) => {
             title: req.body.title,
             description: req.body.description,
             dueDate: req.body.dueDate,
-            assignedUser: req.body.assignedUser,
+            assignedUser: new ObjectId(req.body.assignedUser),
             project: projectId,
             createdAt: new Date()
         };
         const response = await mongoDb.getDatabase().db().collection('tasks').insertOne(task);
-        const taskId = response.insertedId;
+        const taskId = new Object(response.insertedId);
         
         //update project
         const project = await mongoDb.getDatabase().db().collection('projects').updateOne(
