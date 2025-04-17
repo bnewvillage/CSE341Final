@@ -17,37 +17,6 @@ const getCommentsForTask = async (req, res) => {
     }
 };
 
-const getComment = async (req, res) => {
-    //#swagger.tags = ['Comment']
-    try {
-        const commentId = new ObjectId(req.params.id);
-        const comment = await mongoDb.getDatabase().db().collection('comments').findOne({ _id: commentId });
-
-        if (!comment) {
-            return res.status(404).json({ message: 'Comment not found' });
-        }
-
-        res.status(200).json(comment);
-    } catch (err) {
-        res.status(500).json({ message: err.message || 'Internal Server Error.' });
-    }
-};
-
-const getAllComments = async (req, res) => {
-    //#swagger.tags = ['Comment']
-    try {
-        const comments = await mongoDb.getDatabase().db().collection('comments').find().toArray();
-
-        if (!comments.length) {
-            return res.status(404).json({ message: 'No comments found' });
-        }
-
-        res.status(200).json(comments);
-    } catch (err) {
-        res.status(500).json({ message: err.message || 'Internal Server Error.' });
-    }
-};
-
 
 const createCommentForTask = async (req, res) => {
     //#swagger.tags = ['Comment']
