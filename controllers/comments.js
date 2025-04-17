@@ -104,8 +104,6 @@ const deleteComment = async (req, res) => {
 module.exports = {
     createCommentForTask,
     getCommentsForTask,
-    getAllComments,
-    getComment,
     updateComment,
     deleteComment
 };
